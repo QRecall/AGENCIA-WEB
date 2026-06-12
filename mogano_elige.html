@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mogano Café — Elige versión</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%237A3A22'/%3E%3Ctext x='32' y='43' font-size='34' text-anchor='middle' font-family='Georgia' fill='%23F6E8D8'%3EM%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Young+Serif&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F7F2E9;--surf:#FFFFFF;--line:#E5DCCB;--tx:#2B2620;--mut:#6E6557;--menta:#C25E3F;--ease:cubic-bezier(.23,1,.32,1)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Archivo',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;line-height:1.6;font-size:16.5px;-webkit-font-smoothing:antialiased;display:flex;flex-direction:column}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--menta);outline-offset:3px;border-radius:6px}
+.wrap{max-width:840px;margin:0 auto;padding:0 clamp(20px,5vw,32px);width:100%}
+header{padding:34px 0 0}
+.back{display:inline-flex;align-items:center;gap:8px;color:var(--mut);font-size:14.5px;font-weight:600}
+.back:hover{color:var(--menta)}
+main{flex:1;display:flex;align-items:center;padding:clamp(30px,6vw,60px) 0}
+h1{font-stretch:118%;font-weight:800;font-size:clamp(1.9rem,5.6vw,3rem);letter-spacing:-.02em;line-height:1.05;margin-bottom:10px}
+h1 .m{color:var(--menta)}
+.sub{color:var(--mut);margin-bottom:clamp(26px,4.5vw,40px);max-width:34em}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.opt{display:flex;flex-direction:column;justify-content:space-between;min-height:300px;border-radius:22px;padding:clamp(22px,3.6vw,34px);border:1.5px solid var(--line);transition:transform .25s var(--ease),border-color .25s,box-shadow .25s}
+.opt:hover{transform:translateY(-4px);border-color:var(--menta);box-shadow:0 18px 50px rgba(43,38,32,.16)}
+.opt .tag{font-size:11.5px;font-weight:800;letter-spacing:.07em;border-radius:20px;padding:5px 12px;width:fit-content}
+.opt .logo{font-family:'Young Serif';font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.1;margin:26px 0 6px}
+.opt p{font-size:14.5px;margin-bottom:18px}
+.opt .go{font-weight:700;font-size:14.5px;display:inline-flex;align-items:center;gap:8px}
+.opt:hover .go{gap:12px}
+.opt .go{transition:gap .2s var(--ease)}
+/* claro */
+.claro{background:#FAF4F0;color:#3B2A22;border-color:#E0D0C2}
+.claro .tag{background:#7A3A22;color:#F6E8D8}
+.claro .logo{color:#7A3A22}
+.claro p{color:#6E594E}
+.claro .go{color:#7A3A22}
+/* oscuro */
+.oscuro{background:#141114;color:#F2EFE8}
+.oscuro .tag{background:#C9A24A;color:#141114}
+.oscuro .logo{color:#C9A24A}
+.oscuro p{color:#A69D93}
+.oscuro .go{color:#C9A24A}
+footer{padding:26px 0 38px;color:var(--mut);font-size:13.5px;text-align:center}
+footer a{color:var(--menta);font-weight:600}
+@media(max-width:640px){.duo{grid-template-columns:1fr}.opt{min-height:0}}
+</style></head>
+<body>
+<header><div class="wrap"><a class="back" href="index.html">← Estudio Web Benicàssim</a></div></header>
+<main><div class="wrap">
+<h1>Mogano Café, <span class="m">en dos luces</span></h1>
+<p class="sub">La misma web, dos personalidades. Elige cómo te apetece verla — puedes cambiar cuando quieras.</p>
+<div class="duo">
+<a class="opt claro" href="mogano.html">
+<span class="tag">VERSIÓN CLARA</span>
+<div><div class="logo">Mogano Café</div><p>Mediterránea y luminosa: crema, caoba y la terraza de Sant Tomàs a mediodía.</p><span class="go">Ver la versión clara →</span></div>
+</a>
+<a class="opt oscuro" href="mogano_oscuro.html">
+<span class="tag">VERSIÓN OSCURA</span>
+<div><div class="logo">Mogano Café</div><p>Elegante y de noche: negro, oro y el brillo de la brasa al caer la tarde.</p><span class="go">Ver la versión oscura →</span></div>
+</a>
+</div>
+</div></main>
+<footer><div class="wrap">Web de <a href="https://wa.me/34662158568">Estudio Web Benicàssim</a> · 662 158 568</div></footer>
+</body></html>
