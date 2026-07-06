@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- ═══════════════════════════════════════════════════════════════════
+     DEMO PLANTILLA · FISIOTERAPIA · "Webs por Mensaje"
+     Personalizar con buscar-y-reemplazar:
+       · Fisioterapia Meridiana   → nombre real de la clínica
+       · Marta Ferrandis          → nombre real del/la fisio
+       · 600 000 000              → teléfono real (y en wa.me/34600000000)
+       · Carrer de la Salut, 12   → dirección real
+       · 1234-CV                  → nº de colegiado real
+       · Fotos images.unsplash.com → fotos reales del cliente (pedir originales)
+       · Mapa: cambiar la q= del iframe por la dirección real
+     ═══════════════════════════════════════════════════════════════════ -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fisioterapia Meridiana · Fisioterapeuta en Valencia — pide cita por WhatsApp</title>
+<meta name="description" content="Clínica de fisioterapia en Valencia. Valoración completa, plan claro y alta cuando toca. Pide cita por WhatsApp en 1 minuto.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg: oklch(1 0 0);
+  --ink: oklch(0.25 0.05 272);
+  --body: oklch(0.34 0.04 272);
+  --muted: oklch(0.45 0.03 272);
+  --brand: oklch(0.38 0.13 272);
+  --brand-deep: oklch(0.27 0.09 272);
+  --brand-soft: oklch(0.95 0.015 272);
+  --accent: oklch(0.80 0.13 70);
+  --line: oklch(0.90 0.012 272);
+  --wsp: #1faa53;
+  --radius: 18px;
+  --z-header: 40; --z-float: 50;
+  --ease: cubic-bezier(.19,1,.22,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:84px}
+body{
+  margin:0; background:var(--bg); background-color:#fff;
+  color:var(--body); color:#3a3d55;
+  font-family:'Hanken Grotesk',system-ui,sans-serif;
+  font-size:16.5px; line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:'Young Serif',serif; font-weight:400; color:var(--ink); line-height:1.15; text-wrap:balance; margin:0 0 .5em}
+p{text-wrap:pretty; max-width:62ch}
+a{color:var(--brand)}
+img{max-width:100%; display:block}
+.wrap{max-width:1080px; margin:0 auto; padding:0 clamp(18px,4vw,32px)}
+
+/* ─── header ─── */
+.skip{position:absolute; left:-9999px; top:0; background:var(--ink); color:#fff; padding:10px 16px; z-index:60}
+.skip:focus{left:12px; top:12px}
+header{
+  position:sticky; top:0; z-index:var(--z-header);
+  background:color-mix(in oklab, #fff 92%, transparent);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.bar{display:flex; align-items:center; gap:18px; height:66px}
+.logo{font-family:'Young Serif',serif; font-size:19px; color:var(--ink); text-decoration:none; letter-spacing:-.01em}
+.logo span{color:var(--brand)}
+nav.principal{margin-left:auto; display:flex; gap:22px}
+nav.principal a{color:var(--body); text-decoration:none; font-weight:500; font-size:15px}
+nav.principal a:hover{color:var(--brand)}
+.bar .btn-wsp{margin-left:6px}
+@media (max-width:820px){ nav.principal{display:none} .bar{justify-content:space-between} }
+
+/* ─── botones ─── */
+.btn{display:inline-flex; align-items:center; gap:10px; text-decoration:none; font-weight:700;
+  border-radius:999px; padding:14px 26px; font-size:16px; transition:transform .35s var(--ease), box-shadow .35s var(--ease)}
+.btn:hover{transform:translateY(-2px)}
+.btn-wsp{background:var(--wsp); color:#fff; box-shadow:0 8px 24px -10px rgba(31,170,83,.55)}
+.btn-wsp:hover{box-shadow:0 14px 30px -10px rgba(31,170,83,.6)}
+.btn-ghost{color:var(--ink); background:transparent; border:1.5px solid var(--line)}
+.btn-ghost:hover{border-color:var(--brand)}
+.btn small{display:block; font-weight:500; font-size:12px; opacity:.85}
+.ic{width:20px; height:20px; flex:none}
+
+/* ─── hero ─── */
+.hero{padding:clamp(40px,7vw,88px) 0 clamp(36px,5vw,64px); overflow:clip}
+.hero .wrap{display:grid; grid-template-columns:1.08fr .92fr; gap:clamp(28px,5vw,64px); align-items:center}
+.hero h1{font-size:clamp(2.1rem,5.2vw,3.6rem); letter-spacing:-.015em}
+.hero .sub{font-size:clamp(17px,2vw,19px); margin:18px 0 26px}
+.hero .ctas{display:flex; flex-wrap:wrap; gap:14px; align-items:center}
+.tel-alt{font-weight:600; color:var(--ink); text-decoration:none; border-bottom:2px solid var(--accent)}
+.confianza{display:flex; flex-wrap:wrap; gap:10px 26px; margin-top:30px; padding-top:22px; border-top:1px solid var(--line);
+  font-size:14.5px; color:var(--muted); font-weight:500}
+.confianza b{color:var(--ink); font-weight:700}
+.estrellas{color:oklch(0.72 0.15 75); letter-spacing:2px}
+.hero-foto{position:relative}
+.hero-foto img{
+  width:100%; aspect-ratio:4/4.6; object-fit:cover;
+  border-radius:46% 54% 48% 52% / 38% 36% 64% 62%;
+  filter:saturate(.9);
+}
+.hero-foto::after{content:""; position:absolute; inset:0;
+  border-radius:46% 54% 48% 52% / 38% 36% 64% 62%;
+  background:linear-gradient(160deg, oklch(0.38 0.13 272 / .28), transparent 55%);
+  pointer-events:none}
+.hero-foto .sello{
+  position:absolute; left:-6px; bottom:26px; background:#fff; border:1px solid var(--line);
+  border-radius:14px; padding:10px 16px; font-size:13.5px; font-weight:600; color:var(--ink);
+  box-shadow:0 18px 40px -18px oklch(0.27 0.09 272 / .35)}
+.hero-foto .sello em{display:block; font-style:normal; color:var(--muted); font-weight:500; font-size:12px}
+@media (max-width:820px){
+  .hero .wrap{grid-template-columns:1fr}
+  .hero-foto{order:-1; max-width:420px}
+  .hero-foto img{aspect-ratio:4/3.2}
+}
+
+/* ─── banda dolores (drench) ─── */
+.dolores{background:var(--brand-deep); background-color:#232447; color:oklch(0.93 0.01 272); padding:clamp(40px,6vw,64px) 0}
+.dolores h2{color:#fff; font-size:clamp(1.5rem,3.4vw,2.1rem)}
+.dolores p{color:oklch(0.82 0.02 272); line-height:1.75}
+.chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:22px; padding:0; list-style:none}
+.chips li{border:1px solid oklch(0.5 0.06 272); border-radius:999px; padding:8px 18px; font-size:15px; color:#fff}
+.chips li.si{background:var(--accent); border-color:transparent; color:oklch(0.25 0.06 70); font-weight:700}
+
+/* ─── tratamientos (filas editoriales) ─── */
+.tratamientos{padding:clamp(52px,8vw,96px) 0 clamp(24px,4vw,40px)}
+.titulo-seccion{font-size:clamp(1.7rem,4vw,2.5rem); max-width:20ch}
+.fila{display:grid; grid-template-columns:repeat(2,1fr); gap:clamp(24px,5vw,60px); align-items:center;
+  padding:clamp(30px,5vw,54px) 0; border-bottom:1px solid var(--line)}
+.fila:last-of-type{border-bottom:none}
+.fila h3{font-size:clamp(1.3rem,2.6vw,1.7rem)}
+.fila .foto img{width:100%; aspect-ratio:16/10.5; object-fit:cover; border-radius:var(--radius)}
+.fila:nth-of-type(even) .foto{order:2}
+.precio{display:inline-block; margin-top:14px; background:var(--brand-soft); border-radius:10px; padding:8px 14px;
+  font-weight:700; color:var(--ink); font-size:15px}
+.precio span{color:var(--muted); font-weight:500}
+.fila ul{margin:12px 0 0; padding-left:0; list-style:none}
+.fila ul li{padding-left:26px; position:relative; margin-bottom:7px}
+.fila ul li::before{content:"✓"; position:absolute; left:0; color:var(--brand); font-weight:800}
+@media (max-width:820px){ .fila{grid-template-columns:1fr} .fila:nth-of-type(even) .foto{order:0} }
+
+/* ─── proceso (secuencia real 1-2-3) ─── */
+.proceso{background:var(--brand-soft); background-color:#f2f1f8; padding:clamp(52px,8vw,90px) 0}
+.pasos{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:clamp(20px,3vw,36px); margin-top:34px}
+.paso .n{font-family:'Young Serif',serif; font-size:clamp(2.6rem,6vw,3.4rem); color:var(--brand); line-height:1}
+.paso h3{font-size:1.15rem; margin-top:10px}
+.paso p{font-size:15.5px}
+
+/* ─── quién te trata ─── */
+.quien{padding:clamp(52px,8vw,96px) 0}
+.quien .wrap{display:grid; grid-template-columns:.9fr 1.1fr; gap:clamp(28px,5vw,64px); align-items:center}
+.quien img{width:100%; aspect-ratio:4/4.4; object-fit:cover; border-radius:var(--radius)}
+.creds{margin:18px 0 0; padding:0; list-style:none; font-size:15.5px}
+.creds li{margin-bottom:8px; padding-left:26px; position:relative}
+.creds li::before{content:"—"; position:absolute; left:0; color:var(--accent); font-weight:800}
+@media (max-width:820px){ .quien .wrap{grid-template-columns:1fr} .quien img{max-width:380px} }
+
+/* ─── opiniones ─── */
+.opiniones{background:var(--brand-deep); background-color:#232447; padding:clamp(52px,8vw,90px) 0}
+.opiniones h2{color:#fff}
+.opiniones .lead{color:oklch(0.82 0.02 272)}
+.rio{display:grid; grid-template-columns:1.25fr 1fr; gap:clamp(18px,3vw,28px); margin-top:34px}
+.opinion{background:oklch(0.32 0.09 272); background-color:#2e3057; border-radius:var(--radius); padding:clamp(22px,3vw,32px); color:oklch(0.93 0.01 272)}
+.opinion.grande{grid-row:span 2; display:flex; flex-direction:column; justify-content:center}
+.opinion .txt{font-size:clamp(16px,1.9vw,18px); line-height:1.8; margin:10px 0 16px}
+.opinion.grande .txt{font-size:clamp(18px,2.3vw,21px)}
+.opinion .quien-op{font-weight:700; color:#fff; font-size:14.5px}
+.opinion .quien-op span{display:block; font-weight:500; color:oklch(0.75 0.02 272); font-size:13px}
+@media (max-width:820px){ .rio{grid-template-columns:1fr} .opinion.grande{grid-row:auto} }
+
+/* ─── faq ─── */
+.faq{padding:clamp(52px,8vw,96px) 0}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center;
+  gap:16px; padding:20px 2px; font-weight:700; color:var(--ink); font-size:17px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+"; font-family:'Young Serif',serif; font-size:24px; color:var(--brand); transition:rotate .3s var(--ease)}
+.faq details[open] summary::after{rotate:45deg}
+.faq details p{margin:0 0 20px; padding:0 2px}
+
+/* ─── contacto ─── */
+.contacto{background:var(--brand-soft); background-color:#f2f1f8; padding:clamp(52px,8vw,90px) 0}
+.contacto .wrap{display:grid; grid-template-columns:1fr 1.15fr; gap:clamp(26px,5vw,56px)}
+.horario{width:100%; border-collapse:collapse; margin:18px 0 26px; font-size:15.5px}
+.horario td{padding:9px 2px; border-bottom:1px solid oklch(0.86 0.015 272)}
+.horario td:last-child{text-align:right; font-weight:600; color:var(--ink)}
+.mapa{border-radius:var(--radius); overflow:hidden; min-height:340px; box-shadow:0 24px 50px -28px oklch(0.27 0.09 272 / .4)}
+.mapa iframe{width:100%; height:100%; min-height:340px; border:0; display:block}
+@media (max-width:820px){ .contacto .wrap{grid-template-columns:1fr} }
+
+/* ─── footer ─── */
+footer{background:var(--brand-deep); background-color:#232447; color:oklch(0.78 0.02 272); padding:34px 0; font-size:14px}
+footer .wrap{display:flex; flex-wrap:wrap; gap:12px 30px; justify-content:space-between; align-items:center}
+footer a{color:oklch(0.88 0.01 272)}
+footer .marca{font-family:'Young Serif',serif; color:#fff; font-size:16px}
+
+/* ─── whatsapp flotante ─── */
+.flotante{position:fixed; right:18px; bottom:18px; z-index:var(--z-float);
+  width:60px; height:60px; border-radius:50%; background:var(--wsp);
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 12px 30px -8px rgba(31,170,83,.65); transition:transform .35s var(--ease)}
+.flotante:hover{transform:scale(1.08)}
+.flotante svg{width:30px; height:30px}
+
+/* ─── reveals (mejoran un default visible) ─── */
+.js-reveal [data-reveal]{opacity:0; translate:0 22px; transition:opacity .8s var(--ease), translate .8s var(--ease)}
+.js-reveal [data-reveal].in{opacity:1; translate:0 0}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .js-reveal [data-reveal]{opacity:1; translate:none; transition:none}
+  .btn, .flotante{transition:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#principal">Saltar al contenido</a>
+
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="#">Fisioterapia <span>Meridiana</span></a>
+    <nav class="principal" aria-label="Secciones">
+      <a href="#tratamientos">Tratamientos</a>
+      <a href="#proceso">Cómo trabajamos</a>
+      <a href="#opiniones">Opiniones</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <a class="btn btn-wsp" style="padding:10px 20px; font-size:15px" href="https://wa.me/34600000000?text=Hola%2C%20quiero%20pedir%20cita" aria-label="Pedir cita por WhatsApp">
+      <svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.4 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5s.8 1.9.8 2c.1.1.1.3 0 .5-.3.6-.7.9-.5 1.2.7 1.2 1.6 2 2.8 2.6.3.2.5.1.7-.1l.9-1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.4 0 .1 0 .7-.2 1.2Z"/></svg>
+      Pedir cita
+    </a>
+  </div>
+</header>
+
+<main id="principal">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <h1>Que el dolor no decida por ti.</h1>
+        <p class="sub">Fisioterapia en Valencia con valoración completa el primer día, un plan claro de sesiones y el alta cuando toca — no una sesión más de las necesarias.</p>
+        <div class="ctas">
+          <a class="btn btn-wsp" href="https://wa.me/34600000000?text=Hola%2C%20quiero%20pedir%20cita">
+            <svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.4 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5s.8 1.9.8 2c.1.1.1.3 0 .5-.3.6-.7.9-.5 1.2.7 1.2 1.6 2 2.8 2.6.3.2.5.1.7-.1l.9-1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.4 0 .1 0 .7-.2 1.2Z"/></svg>
+            Pide cita por WhatsApp
+          </a>
+          <a class="tel-alt" href="tel:+34600000000">o llama al 600 000 000</a>
+        </div>
+        <div class="confianza">
+          <span><span class="estrellas" aria-hidden="true">★★★★★</span> <b>4,9</b> en Google (87 reseñas)</span>
+          <span><b>+2.400</b> pacientes tratados</span>
+          <span>Colegiada <b>nº 1234-CV</b></span>
+        </div>
+      </div>
+      <div class="hero-foto">
+        <img src="https://images.unsplash.com/photo-1598257006458-087169a1f08d?auto=format&fit=crop&w=1200&q=80" alt="Fisioterapeuta tratando la rodilla de una paciente en camilla" width="600" height="690" fetchpriority="high">
+        <div class="sello">Primera valoración 45 min<em>exploración + plan por escrito</em></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOLORES -->
+  <section class="dolores">
+    <div class="wrap" data-reveal>
+      <h2>¿Te suena alguno de estos?</h2>
+      <p>La mayoría de nuestros pacientes llegan después de semanas "aguantando". Cuanto antes se valora, menos sesiones hacen falta.</p>
+      <ul class="chips">
+        <li>Lumbalgia</li>
+        <li>Cervicales y mandíbula</li>
+        <li>Ciática</li>
+        <li class="si">Lesión deportiva</li>
+        <li>Tendinitis</li>
+        <li>Recuperación post-quirúrgica</li>
+        <li>Dolor de cabeza tensional</li>
+        <li>Esguinces que "no terminan de curar"</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- TRATAMIENTOS -->
+  <section class="tratamientos" id="tratamientos">
+    <div class="wrap">
+      <h2 class="titulo-seccion" data-reveal>Tratamos la causa, no solo el síntoma</h2>
+
+      <div class="fila" data-reveal>
+        <div class="foto"><img loading="lazy" src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=1200&q=80" alt="Tratamiento de fisioterapia manual sobre la espalda" width="600" height="394"></div>
+        <div>
+          <h3>Fisioterapia manual y dolor de espalda</h3>
+          <p>Terapia manual, punción seca y ejercicio terapéutico para lumbalgias, cervicalgias y contracturas que se repiten. Sales de cada sesión sabiendo qué hacer en casa.</p>
+          <ul>
+            <li>Exploración completa el primer día</li>
+            <li>Plan por escrito: cuántas sesiones y por qué</li>
+            <li>Pautas de ejercicio entre sesiones</li>
+          </ul>
+          <span class="precio">45 € / sesión <span>· bono 5 sesiones 200 €</span></span>
+        </div>
+      </div>
+
+      <div class="fila" data-reveal>
+        <div class="foto"><img loading="lazy" src="https://images.unsplash.com/photo-1622902046580-2b47f47f5471?auto=format&fit=crop&w=1200&q=80" alt="Readaptación deportiva con ejercicio guiado" width="600" height="394"></div>
+        <div>
+          <h3>Lesiones deportivas y readaptación</h3>
+          <p>Del esguince al post-operatorio de rodilla u hombro: recuperación progresiva con carga real para volver a entrenar sin miedo a recaer.</p>
+          <ul>
+            <li>Trabajo específico por deporte</li>
+            <li>Criterios objetivos para volver a competir</li>
+            <li>Coordinación con tu entrenador si lo hay</li>
+          </ul>
+          <span class="precio">50 € / sesión <span>· bono 5 sesiones 225 €</span></span>
+        </div>
+      </div>
+
+      <div class="fila" data-reveal>
+        <div class="foto"><img loading="lazy" src="https://images.unsplash.com/photo-1519824145371-296894a0daa9?auto=format&fit=crop&w=1200&q=80" alt="Sala de tratamiento tranquila con camilla" width="600" height="394"></div>
+        <div>
+          <h3>Fisioterapia para mayores y a domicilio</h3>
+          <p>Movilidad, equilibrio y fuerza para seguir haciendo vida normal. Si desplazarse es un problema, vamos nosotros: mismo tratamiento, en casa.</p>
+          <ul>
+            <li>Prevención de caídas</li>
+            <li>Recuperación tras prótesis o fractura</li>
+            <li>Zona centro de Valencia sin coste extra</li>
+          </ul>
+          <span class="precio">55 € / sesión a domicilio <span>· en clínica 45 €</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESO -->
+  <section class="proceso" id="proceso">
+    <div class="wrap">
+      <h2 class="titulo-seccion" data-reveal>Así funciona tu primera visita</h2>
+      <div class="pasos" data-reveal>
+        <div class="paso">
+          <div class="n" aria-hidden="true">1</div>
+          <h3>Escríbenos por WhatsApp</h3>
+          <p>Nos cuentas qué te pasa en dos líneas. Te respondemos el mismo día con hueco para esta semana.</p>
+        </div>
+        <div class="paso">
+          <div class="n" aria-hidden="true">2</div>
+          <h3>Valoración de 45 minutos</h3>
+          <p>Exploración completa, diagnóstico de fisioterapia y primera sesión de tratamiento. Sin prisas.</p>
+        </div>
+        <div class="paso">
+          <div class="n" aria-hidden="true">3</div>
+          <h3>Plan claro y alta</h3>
+          <p>Te decimos cuántas sesiones estimamos y qué haremos en cada una. Cuando estás bien, te damos el alta. Así de simple.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIÉN -->
+  <section class="quien">
+    <div class="wrap">
+      <div data-reveal>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1000&q=80" alt="Marta Ferrandis, fisioterapeuta, en su consulta" width="500" height="550">
+      </div>
+      <div data-reveal>
+        <h2 class="titulo-seccion">Quién va a tratarte</h2>
+        <p><strong style="color:var(--ink)">Marta Ferrandis</strong>, fisioterapeuta colegiada nº 1234-CV. Doce años tratando dolor musculoesquelético, los últimos ocho en su propia consulta del centro de Valencia.</p>
+        <ul class="creds">
+          <li>Graduada en Fisioterapia · Universitat de València</li>
+          <li>Máster en Fisioterapia Deportiva</li>
+          <li>Experta en punción seca y terapia manual</li>
+          <li>Formación continua: ejercicio terapéutico y dolor crónico</li>
+        </ul>
+        <p style="margin-top:18px">«Mi trabajo no es que vuelvas cada semana para siempre. Es que entiendas tu dolor, lo tratemos y te vayas con herramientas para que no vuelva.»</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPINIONES -->
+  <section class="opiniones" id="opiniones">
+    <div class="wrap">
+      <h2 class="titulo-seccion" data-reveal>Lo que dicen al recibir el alta</h2>
+      <p class="lead">Reseñas reales de Google. Puedes leerlas todas en nuestro perfil.</p>
+      <div class="rio" data-reveal>
+        <blockquote class="opinion grande">
+          <span class="estrellas" aria-label="5 estrellas">★★★★★</span>
+          <p class="txt">Llevaba dos años arrastrando una lumbalgia y resignado a vivir con ella. En la primera visita Marta me explicó qué pasaba mejor que nadie en todo ese tiempo. Ocho sesiones después, alta. Sin alargar, sin vender bonos que no necesitas.</p>
+          <div class="quien-op">Javier M. <span>Lumbalgia crónica · 8 sesiones</span></div>
+        </blockquote>
+        <blockquote class="opinion">
+          <span class="estrellas" aria-label="5 estrellas">★★★★★</span>
+          <p class="txt">Me rompí el ligamento cruzado y aquí hice toda la readaptación. Volví a jugar a fútbol 7 sin miedo. El seguimiento por WhatsApp entre sesiones, un 10.</p>
+          <div class="quien-op">Lucía R. <span>Post-operatorio LCA</span></div>
+        </blockquote>
+        <blockquote class="opinion">
+          <span class="estrellas" aria-label="5 estrellas">★★★★★</span>
+          <p class="txt">Vienen a casa a tratar a mi madre de 84 años tras la prótesis de cadera. Puntuales, cariñosos y se nota la mejora cada semana.</p>
+          <div class="quien-op">Carmen S. <span>Fisioterapia a domicilio</span></div>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <div class="wrap" style="max-width:820px">
+      <h2 class="titulo-seccion" data-reveal>Dudas frecuentes</h2>
+      <div data-reveal>
+        <details>
+          <summary>¿Necesito un volante o diagnóstico médico?</summary>
+          <p>No. Puedes venir directamente: la valoración inicial incluye la exploración necesaria. Si detectamos algo que requiere pruebas o un médico, te lo decimos y te orientamos.</p>
+        </details>
+        <details>
+          <summary>¿Cuánto dura y cuánto cuesta cada sesión?</summary>
+          <p>Las sesiones son de 45-50 minutos reales de tratamiento, desde 45 €. La primera visita incluye la valoración completa y ya salimos con plan. Los bonos de 5 sesiones ahorran hasta un 12%.</p>
+        </details>
+        <details>
+          <summary>¿Cuántas sesiones voy a necesitar?</summary>
+          <p>Depende de tu caso, y por eso no lo prometemos por WhatsApp: te lo decimos tras la valoración, por escrito y con criterio. Nuestra media de alta está entre 4 y 8 sesiones.</p>
+        </details>
+        <details>
+          <summary>¿Trabajáis con seguros privados?</summary>
+          <p>Somos clínica privada sin conciertos, lo que nos permite dedicar 45 minutos reales a cada paciente. Te entregamos factura para que la presentes a tu seguro si tu póliza reembolsa fisioterapia.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="contacto" id="contacto">
+    <div class="wrap">
+      <div data-reveal>
+        <h2 class="titulo-seccion">Ven a vernos</h2>
+        <p><strong style="color:var(--ink)">Carrer de la Salut, 12 · 46001 Valencia</strong><br>(a 3 minutos del metro Colón)</p>
+        <table class="horario">
+          <tr><td>Lunes a jueves</td><td>9:00 – 20:00</td></tr>
+          <tr><td>Viernes</td><td>9:00 – 15:00</td></tr>
+          <tr><td>Sábado y domingo</td><td>Cerrado</td></tr>
+        </table>
+        <div class="ctas" style="display:flex; flex-wrap:wrap; gap:14px">
+          <a class="btn btn-wsp" href="https://wa.me/34600000000?text=Hola%2C%20quiero%20pedir%20cita">
+            <svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.4 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5s.8 1.9.8 2c.1.1.1.3 0 .5-.3.6-.7.9-.5 1.2.7 1.2 1.6 2 2.8 2.6.3.2.5.1.7-.1l.9-1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.4 0 .1 0 .7-.2 1.2Z"/></svg>
+            Pedir cita ahora
+          </a>
+          <a class="btn btn-ghost" href="tel:+34600000000">Llamar: 600 000 000</a>
+        </div>
+      </div>
+      <div class="mapa" data-reveal>
+        <iframe title="Mapa: cómo llegar a la clínica" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=Carrer+de+Col%C3%B3n%2C+Valencia&output=embed"></iframe>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="marca">Fisioterapia Meridiana</span>
+    <span>Carrer de la Salut, 12 · Valencia · <a href="tel:+34600000000">600 000 000</a></span>
+    <span><a href="#">Aviso legal</a> · <a href="#">Privacidad</a> · <a href="#">Cookies</a></span>
+  </div>
+</footer>
+
+<a class="flotante" href="https://wa.me/34600000000?text=Hola%2C%20quiero%20pedir%20cita" aria-label="Abrir WhatsApp para pedir cita">
+  <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.4 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5s.8 1.9.8 2c.1.1.1.3 0 .5-.3.6-.7.9-.5 1.2.7 1.2 1.6 2 2.8 2.6.3.2.5.1.7-.1l.9-1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.4 0 .1 0 .7-.2 1.2Z"/></svg>
+</a>
+
+<script>
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || !('IntersectionObserver' in window)) return;
+  document.documentElement.classList.add('js-reveal');
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.12, rootMargin:'0px 0px -6% 0px'});
+  document.querySelectorAll('[data-reveal]').forEach(function(el){ io.observe(el); });
+  // red de seguridad: todo visible pase lo que pase
+  setTimeout(function(){ document.querySelectorAll('[data-reveal]:not(.in)').forEach(function(el){ el.classList.add('in'); }); }, 2500);
+})();
+</script>
+</body>
+</html>
