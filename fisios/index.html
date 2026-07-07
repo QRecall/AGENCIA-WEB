@@ -1,0 +1,142 @@
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Fisios">
+<meta name="theme-color" content="#0f172a">
+<title>Panel Fisios</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--dark:#0f172a;--teal:#0d9488;--bg:#f1f5f9;--card:#fff;--ink:#1e293b;--dim:#64748b;--line:#e2e8f0;--wa:#25D366}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Poppins',sans-serif;font-size:14px;padding-bottom:40px}
+header{background:var(--dark);color:#fff;padding:calc(env(safe-area-inset-top,0px) + 16px) 16px 14px;position:sticky;top:0;z-index:30}
+.htop{display:flex;justify-content:space-between;align-items:center}
+.brand{font-weight:700;font-size:18px;letter-spacing:.3px}
+.brand span{color:#5eead4}
+.hoy{background:rgba(255,255,255,.1);border-radius:20px;padding:5px 11px;font-size:11.5px;font-weight:600}
+.hoy b{color:#5eead4}
+.bars{display:flex;gap:4px;margin-top:12px}
+.bseg{flex:1;text-align:center;background:rgba(255,255,255,.08);border-radius:7px;padding:6px 2px;cursor:pointer;border:1px solid transparent}
+.bseg.on{border-color:#5eead4}
+.bseg b{display:block;font-size:15px}.bseg small{font-size:8.5px;letter-spacing:.2px;color:#cbd5e1;text-transform:uppercase;line-height:1.1;display:block;margin-top:1px}
+.tools{padding:10px 12px 4px;display:flex;gap:8px;flex-wrap:wrap;max-width:760px;margin:0 auto}
+#q{flex:1;min-width:150px;border:1px solid var(--line);border-radius:9px;padding:9px 12px;font-size:14px;font-family:inherit}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:6px 12px 8px;max-width:760px;margin:0 auto}
+.chips button{white-space:nowrap;background:#fff;border:1px solid var(--line);color:#475569;border-radius:20px;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit}
+.chips button.on{background:var(--dark);color:#fff;border-color:var(--dark)}
+main{max-width:760px;margin:0 auto;padding:0 12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 13px;margin-bottom:9px}
+.ctop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.nom{font-weight:600;font-size:14.5px;line-height:1.25;color:var(--ink)}
+.meta{color:var(--dim);font-size:12px;margin-top:3px;display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+.pill{font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;text-transform:uppercase;letter-spacing:.3px}
+.pri-Alta{background:#fef3c7;color:#b45309}.pri-Media{background:#e0e7ff;color:#4338ca}.pri-Baja{background:#f1f5f9;color:#64748b}
+.web{font-size:11px;color:#dc2626;font-weight:600}
+.web.ok{color:#059669}
+.fijo{color:#b45309;font-weight:600}
+.acts{display:flex;gap:7px;margin-top:11px;align-items:center;flex-wrap:wrap}
+.acts a,.acts button{border:0;border-radius:8px;padding:9px 12px;font-size:12.5px;font-weight:600;cursor:pointer;text-decoration:none;font-family:inherit;display:inline-flex;align-items:center;gap:5px}
+.wa{background:var(--wa);color:#fff}
+.call{background:#e2e8f0;color:#334155}
+.note-btn{background:#fff;border:1px solid var(--line)!important;color:#64748b}
+select.est{margin-left:auto;border:1px solid var(--line);border-radius:8px;padding:8px 9px;font-size:12px;font-weight:600;font-family:inherit;color:#fff}
+.e0{background:#94a3b8}.e1{background:#3b82f6}.e2{background:#8b5cf6}.e3{background:#f59e0b}.e4{background:#0d9488}.e5{background:#16a34a}.e6{background:#ef4444}
+.notes{margin-top:9px;display:none}
+.notes.open{display:block}
+.notes textarea{width:100%;border:1px solid var(--line);border-radius:8px;padding:8px;font-size:13px;font-family:inherit;resize:vertical;min-height:52px}
+.fecha{font-size:10.5px;color:var(--dim);margin-left:2px}
+.foot{max-width:760px;margin:16px auto 0;padding:0 14px}
+.reglas{background:#fff;border:1px solid var(--line);border-radius:12px;padding:13px 15px;font-size:12px;color:#475569;line-height:1.6}
+.reglas b{color:var(--ink)}
+.io{display:flex;gap:8px;justify-content:center;margin:14px}
+.io button,.io label{background:#fff;border:1px solid var(--line);color:#475569;border-radius:9px;padding:9px 13px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit}
+input[type=file]{display:none}
+.empty{text-align:center;color:var(--dim);padding:30px;font-size:13px}
+</style></head><body>
+<header>
+ <div class="htop"><div class="brand">Panel <span>Fisios</span></div><div class="hoy">Hoy: <b id="hoyN">0</b>/10 contactados</div></div>
+ <div class="bars" id="bars"></div>
+</header>
+<div class="tools"><input id="q" placeholder="Buscar por nombre o ciudad..."></div>
+<div class="chips" id="chips"></div>
+<main id="list"></main>
+<div class="foot">
+ <div class="reglas"><b>Reglas de oro:</b> máx <b>10/día</b> · personaliza siempre (WhatsApp banea el copia-pega) · si no responden, máx 2 seguimientos (día 3 y 8) · precio <b>400€ al ver la web terminada</b> · si responden con interés → les pasas el vídeo-demo.</div>
+</div>
+<div class="io"><button id="exp">⬇ Exportar</button><label>⬆ Importar<input type="file" id="imp" accept=".json"></label></div>
+<script>
+'use strict';
+var LEADS=[{"n": 1, "pri": "Alta", "nom": "Clínica Alfonso Benito Fisioterapia y Readaptación Funcional", "ciu": "Valencia", "web": "Sin web", "tel": "744 75 51 27", "telc": "744755127", "tipo": "Móvil", "notas": ""}, {"n": 2, "pri": "Alta", "nom": "Clínica Fimed", "ciu": "Valencia", "web": "Web mala", "tel": "684 27 45 57", "telc": "684274557", "tipo": "Móvil", "notas": "Web anticuada/rota → buen lead"}, {"n": 3, "pri": "Alta", "nom": "Clínica Nou Mestalla", "ciu": "Valencia", "web": "Web mala", "tel": "654 59 99 30", "telc": "654599930", "tipo": "Móvil", "notas": "Web anticuada/rota → buen lead"}, {"n": 4, "pri": "Alta", "nom": "Fixio Valencia - Carlos Gironés Fisioterapia", "ciu": "Valencia", "web": "Sin web", "tel": "613 12 71 36", "telc": "613127136", "tipo": "Móvil", "notas": ""}, {"n": 5, "pri": "Alta", "nom": "IMSA Ruzafa Fisioterapia y Ejercicio Terapéutico", "ciu": "Valencia", "web": "Sin web", "tel": "613 09 28 48", "telc": "613092848", "tipo": "Móvil", "notas": ""}, {"n": 6, "pri": "Alta", "nom": "Rosalia Llop Fisioterapia y Osteopatía", "ciu": "Valencia", "web": "Web mala", "tel": "686 57 97 00", "telc": "686579700", "tipo": "Móvil", "notas": "Web anticuada/rota → buen lead"}, {"n": 7, "pri": "Alta", "nom": "Fisioterapia La Colmena - Héctor Magén Bazaco", "ciu": "Zaragoza", "web": "Sin web", "tel": "628 76 18 14", "telc": "628761814", "tipo": "Móvil", "notas": ""}, {"n": 8, "pri": "Alta", "nom": "Fisioterapia Pablo Gallardo", "ciu": "Zaragoza", "web": "Sin web", "tel": "623 32 30 49", "telc": "623323049", "tipo": "Móvil", "notas": ""}, {"n": 9, "pri": "Alta", "nom": "Clínica Fisioquiros", "ciu": "Valencia", "web": "Web mala", "tel": "963 95 06 19", "telc": "963950619", "tipo": "Fijo", "notas": "Web anticuada/rota → buen lead"}, {"n": 10, "pri": "Alta", "nom": "Fisioturia", "ciu": "Valencia", "web": "Sin web", "tel": "963 48 79 31", "telc": "963487931", "tipo": "Fijo", "notas": ""}, {"n": 11, "pri": "Alta", "nom": "Fisioterapia Delicias", "ciu": "Zaragoza", "web": "Web mala", "tel": "976 34 99 34", "telc": "976349934", "tipo": "Fijo", "notas": "Web anticuada/rota → buen lead"}, {"n": 12, "pri": "Media", "nom": "Af Fisioterapia Alicante Gran Vía", "ciu": "Alicante", "web": "Web ok", "tel": "609 23 71 19", "telc": "609237119", "tipo": "Móvil", "notas": ""}, {"n": 13, "pri": "Media", "nom": "Clínica Blanco Fisioterapia Avanzada", "ciu": "Alicante", "web": "Web ok", "tel": "624 07 24 74", "telc": "624072474", "tipo": "Móvil", "notas": ""}, {"n": 14, "pri": "Media", "nom": "Clínica De Fisioterapia CEFIRAM", "ciu": "Alicante", "web": "Web ok", "tel": "623 01 85 03", "telc": "623018503", "tipo": "Móvil", "notas": ""}, {"n": 15, "pri": "Media", "nom": "Clínica Miralles Ferrer Fisioterapia Alicante Centro", "ciu": "Alicante", "web": "Web ok", "tel": "624 47 92 29", "telc": "624479229", "tipo": "Móvil", "notas": ""}, {"n": 16, "pri": "Media", "nom": "Clínica de Fisioterapia Alicante - Fisiomedicin", "ciu": "Alicante", "web": "Web ok", "tel": "659 09 42 82", "telc": "659094282", "tipo": "Móvil", "notas": ""}, {"n": 17, "pri": "Media", "nom": "Clínica de Fisioterapia Alicante Lorena Sanjuan", "ciu": "Alicante", "web": "Web ok", "tel": "668 56 74 55", "telc": "668567455", "tipo": "Móvil", "notas": ""}, {"n": 18, "pri": "Media", "nom": "Clínica de Fisioterapia Ergofisio Alicante", "ciu": "Alicante", "web": "Web ok", "tel": "677 07 01 38", "telc": "677070138", "tipo": "Móvil", "notas": ""}, {"n": 19, "pri": "Media", "nom": "FISIOTERAPIA CLINICA ADSUAR", "ciu": "Alicante", "web": "Web ok", "tel": "657 57 95 72", "telc": "657579572", "tipo": "Móvil", "notas": ""}, {"n": 20, "pri": "Media", "nom": "Fisioterapia KineSalud", "ciu": "Alicante", "web": "Web ok", "tel": "601 90 49 00", "telc": "601904900", "tipo": "Móvil", "notas": ""}, {"n": 21, "pri": "Media", "nom": "Fisioterapia Mas Salud Raúl Mas", "ciu": "Alicante", "web": "Web ok", "tel": "624 40 98 46", "telc": "624409846", "tipo": "Móvil", "notas": ""}, {"n": 22, "pri": "Media", "nom": "Fisioterapia San Blas (FSB)", "ciu": "Alicante", "web": "Web ok", "tel": "669 05 70 76", "telc": "669057076", "tipo": "Móvil", "notas": ""}, {"n": 23, "pri": "Media", "nom": "Fisioterapia en Alicante - Clínica Levante", "ciu": "Alicante", "web": "Web ok", "tel": "686 98 73 67", "telc": "686987367", "tipo": "Móvil", "notas": ""}, {"n": 24, "pri": "Media", "nom": "IKARIA Fisioterapia y podología", "ciu": "Alicante", "web": "Web ok", "tel": "610 50 39 52", "telc": "610503952", "tipo": "Móvil", "notas": ""}, {"n": 25, "pri": "Media", "nom": "Juan Martínez FISIOCAROLINAS", "ciu": "Alicante", "web": "Web ok", "tel": "655 48 22 67", "telc": "655482267", "tipo": "Móvil", "notas": ""}, {"n": 26, "pri": "Media", "nom": "Now Rehab Clinic", "ciu": "Alicante", "web": "Web ok", "tel": "604 86 98 41", "telc": "604869841", "tipo": "Móvil", "notas": ""}, {"n": 27, "pri": "Media", "nom": "AD Fisioterapia Valencia", "ciu": "Valencia", "web": "Web ok", "tel": "661 89 23 08", "telc": "661892308", "tipo": "Móvil", "notas": ""}, {"n": 28, "pri": "Media", "nom": "Clínica Zima Fisioterapia", "ciu": "Valencia", "web": "Web ok", "tel": "661 89 44 97", "telc": "661894497", "tipo": "Móvil", "notas": ""}, {"n": 29, "pri": "Media", "nom": "FISIOTERAPEUTA VALENCIA CLINICA CENTRO", "ciu": "Valencia", "web": "Web ok", "tel": "617 42 36 04", "telc": "617423604", "tipo": "Móvil", "notas": "ficha genérica → ver si es solo redes"}, {"n": 30, "pri": "Media", "nom": "FisioInfinity", "ciu": "Valencia", "web": "Web ok", "tel": "680 72 84 22", "telc": "680728422", "tipo": "Móvil", "notas": ""}, {"n": 31, "pri": "Media", "nom": "Fisiolife Valencia", "ciu": "Valencia", "web": "Web ok", "tel": "656 36 44 27", "telc": "656364427", "tipo": "Móvil", "notas": ""}, {"n": 32, "pri": "Media", "nom": "Fisiosalud Valencia", "ciu": "Valencia", "web": "Web ok", "tel": "600 60 05 35", "telc": "600600535", "tipo": "Móvil", "notas": ""}, {"n": 33, "pri": "Media", "nom": "Fisioterapia Villalba", "ciu": "Valencia", "web": "Web ok", "tel": "630 27 53 94", "telc": "630275394", "tipo": "Móvil", "notas": "web no cargó → revisar a mano"}, {"n": 34, "pri": "Media", "nom": "ITALAE fisioterapia y osteopatía", "ciu": "Valencia", "web": "Web ok", "tel": "691 96 32 74", "telc": "691963274", "tipo": "Móvil", "notas": ""}, {"n": 35, "pri": "Media", "nom": "LaFisio Clinica", "ciu": "Valencia", "web": "Web ok", "tel": "653 64 08 83", "telc": "653640883", "tipo": "Móvil", "notas": ""}, {"n": 36, "pri": "Media", "nom": "Quintana Fisioterapia", "ciu": "Valencia", "web": "Web ok", "tel": "617 76 75 60", "telc": "617767560", "tipo": "Móvil", "notas": ""}, {"n": 37, "pri": "Media", "nom": "CEFISU Centro de Fisioterapia", "ciu": "Zaragoza", "web": "Web ok", "tel": "644 74 83 14", "telc": "644748314", "tipo": "Móvil", "notas": ""}, {"n": 38, "pri": "Media", "nom": "Carlos Aldea Fisioterapia", "ciu": "Zaragoza", "web": "Web ok", "tel": "637 13 48 38", "telc": "637134838", "tipo": "Móvil", "notas": ""}, {"n": 39, "pri": "Media", "nom": "Clínica Jairo Carbonell Fisioterapia y Osteopatía", "ciu": "Zaragoza", "web": "Web ok", "tel": "626 91 99 50", "telc": "626919950", "tipo": "Móvil", "notas": "web no cargó → revisar"}, {"n": 40, "pri": "Media", "nom": "Clínica Podium", "ciu": "Zaragoza", "web": "Web ok", "tel": "647 97 49 24", "telc": "647974924", "tipo": "Móvil", "notas": "web no cargó → revisar"}, {"n": 41, "pri": "Media", "nom": "Clínicas H3 Fisioterapia Zaragoza", "ciu": "Zaragoza", "web": "Web ok", "tel": "622 79 62 20", "telc": "622796220", "tipo": "Móvil", "notas": ""}, {"n": 42, "pri": "Media", "nom": "FisioBejar Salud", "ciu": "Zaragoza", "web": "Web ok", "tel": "674 85 42 63", "telc": "674854263", "tipo": "Móvil", "notas": "web http antigua → revisar a mano"}, {"n": 43, "pri": "Media", "nom": "Fisioterapia Morelli - Las Fuentes", "ciu": "Zaragoza", "web": "Web ok", "tel": "680 51 05 89", "telc": "680510589", "tipo": "Móvil", "notas": ""}, {"n": 44, "pri": "Media", "nom": "Fisioterapia Zaragoza - Actur", "ciu": "Zaragoza", "web": "Web ok", "tel": "644 72 63 27", "telc": "644726327", "tipo": "Móvil", "notas": ""}, {"n": 45, "pri": "Media", "nom": "Más KFISIO Fisioterapia Zaragoza", "ciu": "Zaragoza", "web": "Web ok", "tel": "614 17 87 41", "telc": "614178741", "tipo": "Móvil", "notas": ""}, {"n": 46, "pri": "Media", "nom": "ZENIT FISIOTERAPIA Y SALUD Zaragoza", "ciu": "Zaragoza", "web": "Web ok", "tel": "610 92 12 57", "telc": "610921257", "tipo": "Móvil", "notas": ""}, {"n": 47, "pri": "Baja", "nom": "Clínica de Osteopatía y Fisioterapia San Blas - Silvia Sellers", "ciu": "Alicante", "web": "Web ok", "tel": "966 10 08 00", "telc": "966100800", "tipo": "Fijo", "notas": ""}, {"n": 48, "pri": "Baja", "nom": "Fisioterapia BARCELÓ Alicante", "ciu": "Alicante", "web": "Web ok", "tel": "965 20 80 71", "telc": "965208071", "tipo": "Fijo", "notas": ""}, {"n": 49, "pri": "Baja", "nom": "Fisio's Clínica Joaquín Villarta", "ciu": "Valencia", "web": "Web ok", "tel": "963 46 88 74", "telc": "963468874", "tipo": "Fijo", "notas": ""}, {"n": 50, "pri": "Baja", "nom": "Fisioterapia Casanova", "ciu": "Valencia", "web": "Web ok", "tel": "963 62 28 83", "telc": "963622883", "tipo": "Fijo", "notas": ""}, {"n": 51, "pri": "Baja", "nom": "Fisioterapia Valencia", "ciu": "Valencia", "web": "Web ok", "tel": "963 91 41 59", "telc": "963914159", "tipo": "Fijo", "notas": "ficha genérica → ver si es solo redes"}, {"n": 52, "pri": "Baja", "nom": "NeoFisio Clínica Fisioterapia Valencia", "ciu": "Valencia", "web": "Web ok", "tel": "961 33 90 11", "telc": "961339011", "tipo": "Fijo", "notas": ""}, {"n": 53, "pri": "Baja", "nom": "Fisioterapia Enrique Sierra", "ciu": "Zaragoza", "web": "Web ok", "tel": "976 59 18 76", "telc": "976591876", "tipo": "Fijo", "notas": ""}, {"n": 54, "pri": "Baja", "nom": "Fisioterapia Eva Tello Cadarso", "ciu": "Zaragoza", "web": "Web ok", "tel": "976 29 63 88", "telc": "976296388", "tipo": "Fijo", "notas": ""}, {"n": 55, "pri": "Baja", "nom": "Xanara Salud Fisioterapia", "ciu": "Zaragoza", "web": "Web ok", "tel": "976 39 88 64", "telc": "976398864", "tipo": "Fijo", "notas": ""}];
+var ST=['Por contactar','Contactado','Respondió','Demo enviada','Cerrado','Publicado','Descartado'];
+var KEY='panel_fisios_v1';
+var S={};try{S=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){}
+function g(l){return S[l.n]||(S[l.n]={est:0,notas:l.notas||'',fecha:''})}
+function save(){localStorage.setItem(KEY,JSON.stringify(S))}
+var filt='Todos', q='';
+function today(){var d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()}
+function waText(l){
+ var web=(l.web||'').toLowerCase().indexOf('mala')>=0?'vi que vuestra web está algo anticuada':'no os vi web propia';
+ return 'Hola 👋 soy Nacho. Vi '+l.nom+' en Google ('+l.ciu+') — buena pinta, pero '+web+'. Para un fisio, la web es lo que hace que te encuentren y reserven sin llamar.
+
+Te monto un ejemplo de cómo quedaría la vuestra y te lo paso, sin compromiso. ¿Te lo enseño? 🙂';
+}
+function counts(){var c=ST.map(function(){return 0});LEADS.forEach(function(l){c[g(l).est]++});return c}
+function hoyCount(){var t=today(),n=0;LEADS.forEach(function(l){var s=g(l);if(s.fecha===t&&s.est>=1)n++});return n}
+function bars(){
+ var c=counts();var lbl=['Por contactar','Contactados','Respondió','Demo','Cerrados','Publicados','Descartados'];
+ document.getElementById('bars').innerHTML=[0,1,4,5].map(function(i){return '<div class="bseg'+(filt===ST[i]?' on':'')+'" data-s="'+ST[i]+'"><b>'+c[i]+'</b><small>'+lbl[i]+'</small></div>'}).join('');
+ document.querySelectorAll('#bars .bseg').forEach(function(b){b.onclick=function(){filt=(filt===b.dataset.s?'Todos':b.dataset.s);render()}});
+ document.getElementById('hoyN').textContent=hoyCount();
+}
+function chips(){
+ var fs=['Todos'].concat(ST).concat(['Alta','Valencia','Alicante','Zaragoza']);
+ document.getElementById('chips').innerHTML=fs.map(function(f){return '<button data-f="'+f+'" class="'+(filt===f?'on':'')+'">'+f+'</button>'}).join('');
+ document.querySelectorAll('#chips button').forEach(function(b){b.onclick=function(){filt=b.dataset.f;render()}});
+}
+function match(l){
+ if(q){var t=(l.nom+' '+l.ciu).toLowerCase();if(t.indexOf(q)<0)return false}
+ if(filt==='Todos')return true;
+ if(ST.indexOf(filt)>=0)return ST[g(l).est]===filt;
+ if(filt==='Alta')return l.pri==='Alta';
+ if(['Valencia','Alicante','Zaragoza'].indexOf(filt)>=0)return l.ciu===filt;
+ return true;
+}
+function render(){
+ bars();chips();
+ var L=LEADS.filter(match);
+ var html=L.map(function(l){
+  var s=g(l);
+  var fijo=(l.tipo||'').toLowerCase().indexOf('fij')>=0;
+  var webOk=(l.web||'').toLowerCase().indexOf('sin')<0 && (l.web||'').toLowerCase().indexOf('mala')<0;
+  var wa='https://wa.me/34'+l.telc+'?text='+encodeURIComponent(waText(l));
+  var opts=ST.map(function(n,i){return '<option value="'+i+'"'+(s.est===i?' selected':'')+'>'+n+'</option>'}).join('');
+  return '<div class="card" data-id="'+l.n+'">'+
+   '<div class="ctop"><div><div class="nom">'+l.nom+'</div>'+
+   '<div class="meta"><span class="pill pri-'+(l.pri||'Baja')+'">'+(l.pri||'')+'</span>'+
+   '<span>'+l.ciu+'</span>'+
+   '<span class="web'+(webOk?' ok':'')+'">'+(l.web||'')+'</span>'+
+   (fijo?'<span class="fijo">⚠️ fijo</span>':'')+
+   (s.fecha?'<span class="fecha">· '+s.fecha+'</span>':'')+
+   '</div></div></div>'+
+   '<div class="acts">'+
+   '<a class="wa" href="'+wa+'" target="_blank" rel="noopener" data-w="'+l.n+'">💬 WhatsApp</a>'+
+   '<a class="call" href="tel:'+l.telc+'">📞 '+l.tel+'</a>'+
+   '<button class="note-btn" data-nt="'+l.n+'">📝</button>'+
+   '<select class="est e'+s.est+'" data-e="'+l.n+'">'+opts+'</select>'+
+   '</div>'+
+   '<div class="notes" id="nt'+l.n+'"><textarea data-nv="'+l.n+'" placeholder="Notas...">'+(s.notas||'')+'</textarea></div>'+
+   '</div>';
+ }).join('')||'<div class="empty">Nada en este filtro.</div>';
+ document.getElementById('list').innerHTML=html;
+ document.querySelectorAll('select.est').forEach(function(sel){sel.onchange=function(){var l=LEADS.find(function(x){return x.n==sel.dataset.e});var st=g(l);st.est=+sel.value;if(st.est>=1&&!st.fecha)st.fecha=today();save();render()}});
+ document.querySelectorAll('.note-btn').forEach(function(b){b.onclick=function(){document.getElementById('nt'+b.dataset.nt).classList.toggle('open')}});
+ document.querySelectorAll('textarea[data-nv]').forEach(function(t){t.onblur=function(){g(LEADS.find(function(x){return x.n==t.dataset.nv})).notas=t.value;save()}});
+ document.querySelectorAll('.wa').forEach(function(a){a.addEventListener('click',function(){var l=LEADS.find(function(x){return x.n==a.dataset.w});var st=g(l);if(st.est===0){st.est=1;if(!st.fecha)st.fecha=today();save();setTimeout(render,300)}})});
+}
+document.getElementById('q').oninput=function(e){q=e.target.value.toLowerCase().trim();render()};
+document.getElementById('exp').onclick=function(){var b=new Blob([JSON.stringify(S,null,1)],{type:'application/json'});var u=document.createElement('a');u.href=URL.createObjectURL(b);u.download='panel_fisios.json';u.click()};
+document.getElementById('imp').onchange=function(e){var f=e.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(){try{S=JSON.parse(r.result)||{};save();render();alert('Importado ✔')}catch(x){alert('Archivo no válido')}};r.readAsText(f)};
+render();
+</script></body></html>
