@@ -78,9 +78,7 @@ var filt='Todos', q='';
 function today(){var d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()}
 function waText(l){
  var web=(l.web||'').toLowerCase().indexOf('mala')>=0?'vi que vuestra web está algo anticuada':'no os vi web propia';
- return 'Hola 👋 soy Nacho. Vi '+l.nom+' en Google ('+l.ciu+') — buena pinta, pero '+web+'. Para un fisio, la web es lo que hace que te encuentren y reserven sin llamar.
-
-Te monto un ejemplo de cómo quedaría la vuestra y te lo paso, sin compromiso. ¿Te lo enseño? 🙂';
+ return 'Hola 👋 soy Nacho. Vi '+l.nom+' en Google ('+l.ciu+') — buena pinta, pero '+web+'. Para un fisio, la web es lo que hace que te encuentren y reserven sin llamar.\n\nTe monto un ejemplo de cómo quedaría la vuestra y te lo paso, sin compromiso. ¿Te lo enseño? 🙂';
 }
 function counts(){var c=ST.map(function(){return 0});LEADS.forEach(function(l){c[g(l).est]++});return c}
 function hoyCount(){var t=today(),n=0;LEADS.forEach(function(l){var s=g(l);if(s.fecha===t&&s.est>=1)n++});return n}
